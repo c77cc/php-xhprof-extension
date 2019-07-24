@@ -4,7 +4,7 @@ if (PHP_SECURITY_FLAGS == "yes") {
 }
 
 ARG_ENABLE("xhprof", "whether to enable xhprof support", "no");
-if (PHP_TIDEWAYS == "yes") {
+if (PHP_XHPROF == "yes") {
     EXTENSION("xhprof", "tideways.c");
     var dll = get_define('PHPDLL');
     if (null != dll.match(/^php5/)) {

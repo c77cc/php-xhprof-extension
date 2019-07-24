@@ -3644,6 +3644,7 @@ PHP_FUNCTION(tideways_sql_minify)
 	RETURN_EMPTY_STRING();
 }
 
+#ifdef PHP_WIN32
 int tw_getrusage(int who, struct rusage * rusage)
 {
     FILETIME starttime;
@@ -3687,3 +3688,4 @@ int tw_getrusage(int who, struct rusage * rusage)
     // success
     return 0;
 }
+#endif

@@ -385,8 +385,8 @@ ZEND_END_ARG_INFO()
  */
 /* List of functions implemented/exposed by Tideways */
 zend_function_entry tideways_functions[] = {
-	PHP_FE(tideways_enable, arginfo_tideways_enable)
-	PHP_FE(tideways_disable, arginfo_tideways_disable)
+	PHP_FE(xhprof_enable, arginfo_tideways_enable)
+	PHP_FE(xhprof_disable, arginfo_tideways_disable)
 	PHP_FE(tideways_transaction_name, arginfo_tideways_transaction_name)
 	PHP_FE(tideways_prepend_overwritten, arginfo_tideways_prepend_overwritten)
 	PHP_FE(tideways_fatal_backtrace, arginfo_tideways_fatal_backtrace)
@@ -439,6 +439,7 @@ PHP_INI_ENTRY("tideways.collect", "tracing", PHP_INI_ALL, NULL)
 PHP_INI_ENTRY("tideways.monitor", "basic", PHP_INI_ALL, NULL)
 PHP_INI_ENTRY("tideways.distributed_tracing_hosts", "127.0.0.1", PHP_INI_ALL, NULL)
 PHP_INI_ENTRY("tideways.log_level", "0", PHP_INI_ALL, NULL)
+PHP_INI_ENTRY("xhprof.output_dir", "", PHP_INI_ALL, NULL)
 
 PHP_INI_END()
 
@@ -1629,13 +1630,13 @@ PHP_MINFO_FUNCTION(tideways)
 
 static void hp_register_constants(INIT_FUNC_ARGS)
 {
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_CPU", TIDEWAYS_FLAGS_CPU, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_MEMORY", TIDEWAYS_FLAGS_MEMORY, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_NO_BUILTINS", TIDEWAYS_FLAGS_NO_BUILTINS, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_NO_USERLAND", TIDEWAYS_FLAGS_NO_USERLAND, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_NO_COMPILE", TIDEWAYS_FLAGS_NO_COMPILE, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_NO_SPANS", TIDEWAYS_FLAGS_NO_SPANS, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("TIDEWAYS_FLAGS_NO_HIERACHICAL", TIDEWAYS_FLAGS_NO_HIERACHICAL, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_CPU", TIDEWAYS_FLAGS_CPU, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_MEMORY", TIDEWAYS_FLAGS_MEMORY, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_NO_BUILTINS", TIDEWAYS_FLAGS_NO_BUILTINS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_NO_USERLAND", TIDEWAYS_FLAGS_NO_USERLAND, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_NO_COMPILE", TIDEWAYS_FLAGS_NO_COMPILE, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_NO_SPANS", TIDEWAYS_FLAGS_NO_SPANS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("XHPROF_FLAGS_NO_HIERACHICAL", TIDEWAYS_FLAGS_NO_HIERACHICAL, CONST_CS | CONST_PERSISTENT);
 }
 
 /**
@@ -3451,7 +3452,7 @@ PHP_FUNCTION(tideways_span_callback)
  * @return void
  * @author kannan
  */
-PHP_FUNCTION(tideways_enable)
+PHP_FUNCTION(xhprof_enable)
 {
 	zend_long tideways_flags = 0;
 	zval *optional_array = NULL;
@@ -3487,7 +3488,7 @@ PHP_FUNCTION(tideways_enable)
  * @return array  hash-array of Tideways's profile info
  * @author cjiang
  */
-PHP_FUNCTION(tideways_disable)
+PHP_FUNCTION(xhprof_disable)
 {
 	if (!TWG(enabled)) {
 		return;

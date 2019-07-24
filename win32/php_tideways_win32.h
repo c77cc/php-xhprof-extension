@@ -81,8 +81,5 @@ struct rusage {
     struct timeval ru_utime;    /* user time used */
     struct timeval ru_stime;    /* system time used */
 };
-#if 1
-int tw_getrusage(int who, struct rusage * rusage);
-#endif
 
 #endif  /* PHP_TIDEWAYS_WIN32_H */

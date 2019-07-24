@@ -1,6 +1,6 @@
 
-PHP_ARG_ENABLE(tideways, whether to enable Tideways support,
-[ --enable-tideways      Enable Tideways support])
+PHP_ARG_ENABLE(xhprof, whether to enable Xhprof support,
+[ --enable-xhprof      Enable xhprof support])
 
 AC_DEFUN([AC_TIDEWAYS_CLOCK],
 [
@@ -96,5 +96,5 @@ if test "$PHP_TIDEWAYS" != "no"; then
 
   PHP_SUBST([LIBS])
   PHP_SUBST([TIDEWAYS_SHARED_LIBADD])
-  PHP_NEW_EXTENSION(tideways, $TIDEWAYS_SOURCES, $ext_shared)
+  PHP_NEW_EXTENSION(xhprof, $TIDEWAYS_SOURCES, $ext_shared)
 fi

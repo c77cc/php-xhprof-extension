@@ -408,7 +408,7 @@ ZEND_DECLARE_MODULE_GLOBALS(hp)
 /* Callback functions for the Tideways extension */
 zend_module_entry tideways_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"tideways",                        /* Name of the extension */
+	"xhprof",                        /* Name of the extension */
 	tideways_functions,                /* List of functions exposed */
 	PHP_MINIT(tideways),               /* Module init callback */
 	PHP_MSHUTDOWN(tideways),           /* Module shutdown callback */

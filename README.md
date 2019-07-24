@@ -13,6 +13,7 @@ Profiler in production.
 - PHP 5.3, 5.4, 5.5, 5.6 or 7.0
 - cURL and PCRE Dev Headers (`apt-get install libcurl4-openssl-dev libpcre3-dev`)
 - Tested with Linux i386, amd64 architectures
+- Tested with Windows i386 architectures
 
 ## Installation
 
@@ -27,6 +28,20 @@ Building from source is straightforward:
     ./configure
     make
     sudo make install
+
+## Installation Windows
+
+- [php_xhprof-5.6-nts-vc11-x86.dll](https://github.com/c77cc/php-xhprof-extension/raw/appveyor/dlls/php_xhprof-5.6-nts-vc11-x86.dll)
+
+## How to use
+
+```
+<?php
+xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
+// ... your code
+$data = xhprof_disable();
+print_r($data);
+```
 
 You also need the latest ``Tideways.php`` if you want to use the Profiler in combination with our daemon and UI.
 [Download the file from Github](https://github.com/tideways/profiler/releases). Put this file into your
